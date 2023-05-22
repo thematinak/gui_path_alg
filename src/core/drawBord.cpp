@@ -1,9 +1,8 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
-#include "Bord.hpp"
+#include "drawBord.hpp"
 
-sf::Color typeColo[6] = {
+sf::Color typeColor[6] = {
     sf::Color::Black, // wall
     sf::Color::White, // empty
     sf::Color::Yellow, // wisited
@@ -12,8 +11,8 @@ sf::Color typeColo[6] = {
     sf::Color::Cyan // queued
 };
 
-sf::Color getColot(int type) {
-    return typeColo[type];
+sf::Color getColot(int typeNum) {
+    return typeColor[typeNum];
 }
 
 void drawBord(sf::RenderWindow& window, const Bord& bord) {

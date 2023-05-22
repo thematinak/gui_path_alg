@@ -1,21 +1,17 @@
 #pragma once
 
+#include "log.hpp"
 #include <iostream>
-#include <string>
-#include <utility>
-#include "Bord.cpp"
-#include "../depthFirst.hpp"
-#include "../breadthFirst.hpp"
 
 using namespace std;
 
 void log(const string& msg) {
-    cout<< msg << endl;
+    cout << msg << endl;
 }
 
 void log(const Bord& bord) {
-    cout<< "xSize: " << bord.xSize << " ySize: " << bord.ySize << " squerSize: " << bord.squerSize << endl;
-    cout<< "data: " << endl;
+    cout << "xSize: " << bord.xSize << " ySize: " << bord.ySize << " squerSize: " << bord.squerSize << endl;
+    cout << "data: " << endl;
     for (size_t j = 0; j < bord.ySize; j++) {
         char a[] = {0, 0, 0, 0, 0, 0, 0};
         sprintf(a, "%2d", j);

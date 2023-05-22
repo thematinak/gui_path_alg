@@ -1,11 +1,8 @@
 #pragma once
 
 #include "breadthFirst.hpp"
-#include "core/Bord.hpp"
-#include "core/log.cpp"
 
 namespace breadth {
-
     void push(BreadthFirstContext& c, pair<int, int> val) {
         c.queueIn.push_back(val);
     }

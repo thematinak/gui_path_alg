@@ -1,13 +1,13 @@
 #pragma once
 
-#include <string.h>
+#include <string>
 
-int WALL = 0;
-int EMPTY = 1;
-int WISITED = 2;
-int START = 3;
-int END = 4;
-int QUEUED = 5;
+const int WALL = 0;
+const int EMPTY = 1;
+const int WISITED = 2;
+const int START = 3;
+const int END = 4;
+const int QUEUED = 5;
 
 struct Bord {
     int xSize;

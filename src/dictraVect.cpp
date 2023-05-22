@@ -2,8 +2,6 @@
 
 #include "dictraVect.hpp"
 
-#include "core/Bord.hpp"
-
 namespace dictVect {
 
     void swap(Triplet& a, Triplet& b) {

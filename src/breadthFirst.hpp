@@ -2,6 +2,7 @@
 
 #include <utility>
 #include <vector>
+
 #include "core/Bord.hpp"
 
 
@@ -11,3 +12,11 @@ struct BreadthFirstContext {
     vector<pair<int, int>> queueIn;
     vector<pair<int, int>> queueOut;
 };
+
+namespace breadth {
+
+    BreadthFirstContext creteBreadthFirstContext(const Bord& bord);
+
+    bool nextStep(const Bord& bord, BreadthFirstContext& c);
+
+}

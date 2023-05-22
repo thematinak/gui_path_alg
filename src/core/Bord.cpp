@@ -3,7 +3,7 @@
 #include <fstream>
 
 #include "Bord.hpp"
-#include "log.cpp"
+#include "log.hpp"
 
 int getType(char a) {
     if(a == '#') {

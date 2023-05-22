@@ -1,10 +1,6 @@
 #pragma once
 
-#include <utility>
 #include "depthFirst.hpp"
-#include "core/log.cpp"
-
-#include "core/Bord.hpp"
 
 using namespace std;
 

@@ -1,17 +1,14 @@
 #include <SFML/Graphics.hpp>
 #include <chrono>
 
-#include "core/Bord.cpp"
-#include "core/drawBord.cpp"
+#include "core/Bord.hpp"
+#include "core/drawBord.hpp"
+#include "core/log.hpp"
 
 #include "depthFirst.hpp"
-#include "depthFirst.cpp"
-
 #include "breadthFirst.hpp"
-#include "breadthFirst.cpp"
-
 #include "dictraVect.hpp"
-#include "dictraVect.cpp"
+
 
 const int WIDTH = 500;
 const int HEIGHT = 500;
@@ -29,7 +26,7 @@ int main() {
     DictraVectContext dictVecC = dictVect::creteDictraVectContext(bord);
 
     chrono::steady_clock::time_point prew_time = chrono::steady_clock::now();
-    int64_t tickTime = 1000000 / 4;
+    int64_t tickTime = 1000000 / 30;
 
     bool notFinnished = true;
 
