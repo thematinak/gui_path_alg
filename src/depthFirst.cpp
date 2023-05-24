@@ -1,21 +1,29 @@
-#pragma once
 
 #include "depthFirst.hpp"
 
 using namespace std;
 
 namespace depth {
-    void push(DepthFirstContext& c, pair<int, int> val) {
-        c.stack.push_back(val);
+    
+    void push(DepthFirstContext& c, Pair<int, int> val) {
+        c.stack.push(val);
+    }
+
+    Pair<int, int> pop(DepthFirstContext& c) {
+        return c.stack.pop();
+    }
+
+    bool hasNext(const DepthFirstContext& c) {
+        return c.stack.hasNext();
     }
 
     DepthFirstContext creteDepthFirstContext(const Bord& bord) {
         DepthFirstContext res;
 
-        for (size_t i = 0; i < bord.xSize; i++) {
-            for (size_t j = 0; j < bord.ySize; j++) {
+        for (int i = 0; i < bord.xSize; i++) {
+            for (int j = 0; j < bord.ySize; j++) {
                 if (bord.data[i][j] == START) {
-                    pair<int, int> start(i, j);
+                    Pair<int, int> start(i, j);
                     push(res, start);
                     return res;
                 }
@@ -24,22 +32,12 @@ namespace depth {
         return res;
     }
 
-    pair<int, int> pop(DepthFirstContext& c) {
-        pair<int, int> res = c.stack[c.stack.size() - 1];
-        c.stack.pop_back();
-        return res;
-    }
-
-    bool hasNext(const DepthFirstContext& c) {
-        return c.stack.size() != 0;
-    }
-
     bool nextStep(const Bord& bord, DepthFirstContext& c) {
         bool next = hasNext(c);
         if(!next) {
             return true;
         }
-        pair<int, int> item = pop(c);
+        Pair<int, int> item = pop(c);
 
         if (bord.data[item.first][item.second] == END) {
             return true;
@@ -53,7 +51,7 @@ namespace depth {
             if(left == EMPTY) {
                 bord.data[item.first - 1][item.second] = QUEUED;
             }
-            push(c, pair<int, int>(item.first - 1, item.second));
+            push(c, Pair<int, int>(item.first - 1, item.second));
         }
 
         auto up = bord.data[item.first][item.second - 1];
@@ -61,7 +59,7 @@ namespace depth {
             if(up == EMPTY) {
                 bord.data[item.first][item.second - 1] = QUEUED;
             }
-            push(c, pair<int, int>(item.first, item.second-1));
+            push(c, Pair<int, int>(item.first, item.second-1));
         }
 
         auto right = bord.data[item.first + 1][item.second];
@@ -69,7 +67,7 @@ namespace depth {
             if(right == EMPTY) {
                 bord.data[item.first + 1][item.second] = QUEUED;
             }
-            push(c, pair<int, int>(item.first + 1, item.second));
+            push(c, Pair<int, int>(item.first + 1, item.second));
         }
 
         auto down = bord.data[item.first][item.second + 1];
@@ -77,7 +75,7 @@ namespace depth {
             if(down == EMPTY) {
                 bord.data[item.first][item.second + 1] = QUEUED;
             }
-            push(c, pair<int, int>(item.first, item.second+1));
+            push(c, Pair<int, int>(item.first, item.second+1));
         }
         
         return false;

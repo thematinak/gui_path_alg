@@ -1,4 +1,3 @@
-#pragma once
 
 #include <fstream>
 
@@ -26,9 +25,9 @@ Bord createBord(const int sizeX, const int sizeY, const int squerSize) {
     b.squerSize = squerSize;
 
     b.data = new int*[sizeX];
-    for(size_t i = 0; i < sizeX; i++) {
+    for(int i = 0; i < sizeX; i++) {
         b.data[i] = new int[sizeY];
-        for (size_t j = 0; j < sizeY; j++) {
+        for (int j = 0; j < sizeY; j++) {
             b.data[i][j] = EMPTY;
         }
     }
@@ -46,9 +45,9 @@ Bord createBord(const std::string& pathToFile, const int width, const int height
         myfile >> x >> y;
         std::getline(myfile, line);
         Bord bord = createBord(x, y, std::min(width / x, height / y));
-        for(size_t i = 0; i < y; i++) {
+        for(int i = 0; i < y; i++) {
             std::getline(myfile, line);
-            for(size_t j = 0; j < x; j++) {
+            for(int j = 0; j < x; j++) {
                 bord.data[j][i] = getType(line[j]);
             }
         }

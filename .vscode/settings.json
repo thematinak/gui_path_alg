@@ -43,6 +43,13 @@
         "stdexcept": "cpp",
         "streambuf": "cpp",
         "typeinfo": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "cerrno": "cpp",
+        "climits": "cpp",
+        "ios": "cpp",
+        "locale": "cpp",
+        "queue": "cpp",
+        "random": "cpp",
+        "cstring": "cpp"
     }
 }

@@ -1,8 +1,8 @@
 #pragma once
 
 #include <string>
-#include <utility>
 #include "Bord.hpp"
+#include "Pair.cpp"
 #include "../depthFirst.hpp"
 #include "../breadthFirst.hpp"
 
@@ -12,11 +12,11 @@ void log(const string& msg);
 
 void log(const Bord& bord);
 
-void log(const pair<int, int>& c, bool end);
+void log(const Pair<int, int>& c, bool end);
 
 void log(int val);
 
-void log(const pair<int, int>& pair);
+void log(const Pair<int, int>& pair);
 
 void log(const DepthFirstContext& c);
 

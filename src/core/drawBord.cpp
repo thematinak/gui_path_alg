@@ -1,4 +1,3 @@
-#pragma once
 
 #include "drawBord.hpp"
 
@@ -17,8 +16,8 @@ sf::Color getColot(int typeNum) {
 
 void drawBord(sf::RenderWindow& window, const Bord& bord) {
     window.clear();
-    for (size_t i = 0; i < bord.xSize; i++) {
-        for (size_t j = 0; j < bord.ySize; j++) {
+    for (int i = 0; i < bord.xSize; i++) {
+        for (int j = 0; j < bord.ySize; j++) {
 
             auto newColor = getColot(bord.data[i][j]);
             auto shadowColor = newColor == sf::Color::Black ? sf::Color::White : sf::Color::Black;

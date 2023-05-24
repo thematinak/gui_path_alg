@@ -1,18 +1,13 @@
 #pragma once
 
-#include <utility>
-#include <vector>
-
 #include "core/Bord.hpp"
+#include "core/Triplet.cpp"
+#include "dataStructures/Vector.cpp"
 
 using namespace std;
 
-struct Triplet {
-    int first, second, prio;
-};
-
 struct DictraVectContext {
-    vector<Triplet> prioQueu;
+    Vector<Triplet<int, int, int>> prioQueu;
 };
 
 namespace dictVect {

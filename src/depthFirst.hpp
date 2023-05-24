@@ -1,14 +1,13 @@
 #pragma once
 
-#include <utility>
-#include <vector>
-
 #include "core/Bord.hpp"
+#include "core/Pair.cpp"
+#include "dataStructures/Stack.cpp"
 
 using namespace std;
 
 struct DepthFirstContext {
-    vector<pair<int, int>> stack;
+    Stack<Pair<int, int>> stack;
 };
 
 namespace depth {

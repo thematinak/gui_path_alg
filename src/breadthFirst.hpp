@@ -1,16 +1,14 @@
 #pragma once
 
-#include <utility>
-#include <vector>
-
+#include "dataStructures/Queue.cpp"
 #include "core/Bord.hpp"
+#include "core/Pair.cpp"
 
 
 using namespace std;
 
 struct BreadthFirstContext {
-    vector<pair<int, int>> queueIn;
-    vector<pair<int, int>> queueOut;
+    Queue<Pair<int, int>> queue;
 };
 
 namespace breadth {

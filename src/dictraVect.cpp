@@ -1,21 +1,20 @@
-#pragma once
 
 #include "dictraVect.hpp"
 
 namespace dictVect {
 
-    void swap(Triplet& a, Triplet& b) {
+    void swap(Triplet<int, int, int>& a, Triplet<int, int, int>& b) {
         auto tmp = a;
         a = b;
         b = tmp;
 
     }
 
-    void push(DictraVectContext& c, Triplet val) {
-        c.prioQueu.push_back(val);
+    void push(DictraVectContext& c, Triplet<int, int, int> val) {
+        c.prioQueu.add(val);
     }
 
-    Triplet pop(DictraVectContext& c) {
+    Triplet<int, int, int> pop(DictraVectContext& c) {
         int idx = 0;
         int prio = c.prioQueu[0].prio;
         for (int i = 0; i < c.prioQueu.size(); i++) {
@@ -27,8 +26,12 @@ namespace dictVect {
 
         auto res = c.prioQueu[idx];
         swap(c.prioQueu[idx], c.prioQueu[c.prioQueu.size() - 1]);
-        c.prioQueu.pop_back();
+        c.prioQueu.popLast();
         return res;
+    }
+
+    bool hasNext(const DictraVectContext& c) {
+        return c.prioQueu.size() != 0;
     }
 
     DictraVectContext creteDictraVectContext(const Bord& bord) {
@@ -36,7 +39,7 @@ namespace dictVect {
         for (int i = 0; i < bord.xSize; i++) {
             for (int j = 0; j < bord.ySize; j++) {
                 if (bord.data[i][j] == START) {
-                    Triplet start = {i, j, 0};
+                    Triplet<int, int, int> start(i, j, 0);
                     push(res, start);
                     return res;
                 }
@@ -45,16 +48,12 @@ namespace dictVect {
         return res;
     }
 
-    bool hasNext(const DictraVectContext& c) {
-        return c.prioQueu.size() != 0;
-    }
-
     bool nextStep(const Bord& bord, DictraVectContext& c) {
         bool next = hasNext(c);
         if(!next) {
             return true;
         }
-        Triplet item = pop(c);
+        Triplet<int, int, int> item = pop(c);
 
         if (bord.data[item.first][item.second] == END) {
             return true;
@@ -68,7 +67,7 @@ namespace dictVect {
             if(left == EMPTY) {
                 bord.data[item.first - 1][item.second] = QUEUED;
             }
-            Triplet toPush = {item.first - 1, item.second, item.prio + 1};
+            Triplet<int, int, int> toPush(item.first - 1, item.second, item.prio + 1);
             push(c, toPush);
         }
 
@@ -77,7 +76,7 @@ namespace dictVect {
             if(up == EMPTY) {
                 bord.data[item.first][item.second - 1] = QUEUED;
             }
-            Triplet toPush = {item.first, item.second - 1, item.prio + 1};
+            Triplet<int, int, int> toPush(item.first, item.second - 1, item.prio + 1);
             push(c, toPush);
         }
 
@@ -86,7 +85,7 @@ namespace dictVect {
             if(right == EMPTY) {
                 bord.data[item.first + 1][item.second] = QUEUED;
             }
-            Triplet toPush = {item.first + 1, item.second, item.prio + 1};
+            Triplet<int, int, int> toPush(item.first + 1, item.second, item.prio + 1);
             push(c, toPush);
         }
 
@@ -95,7 +94,7 @@ namespace dictVect {
             if(down == EMPTY) {
                 bord.data[item.first][item.second + 1] = QUEUED;
             }
-            Triplet toPush = {item.first, item.second + 1, item.prio + 1};
+            Triplet<int, int, int> toPush(item.first, item.second + 1, item.prio + 1);
             push(c, toPush);
         }
 
