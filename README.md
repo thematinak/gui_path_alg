@@ -10,4 +10,4 @@ robocopy .\src\resources\ %targetLocation% > nul
 g++ .\src\core\*.cpp .\src\*.cpp -o %targetLocation%/main.exe -lsfml-graphics -lsfml-window -lsfml-system -Wall
 ```
 
-Don't forget link **sfml** library
+Don't forget to link **sfml** library
