@@ -1,47 +1,46 @@
 
-#include "dictraVect.hpp"
+#include <cmath>
+#include "aHeap.hpp"
 
-namespace dictVect {
+namespace aHeap {
 
-    void push(DictraVectContext& c, Triplet<int, int, int> val) {
-        c.prioQueu.add(val);
+    void push(AContext& c, int priority, Triplet<int, int, int> val) {
+        c.minHeap.push(priority, val);
     }
 
-    Triplet<int, int, int> pop(DictraVectContext& c) {
-        int idx = 0;
-        int prio = c.prioQueu[0].prio;
-        for (int i = 0; i < c.prioQueu.size(); i++) {
-            if (c.prioQueu[i].prio < prio) {
-                idx = i;
-                prio = c.prioQueu[i].prio;
-            }
-        }
+    Triplet<int, int, int> pop(AContext& c) {
+        return c.minHeap.pop();
+    }
 
-        auto res = c.prioQueu[idx];
-        c.prioQueu.swap(idx, c.prioQueu.size() - 1);
-        c.prioQueu.popLast();
+    int aproxPriority(AContext& c, Triplet<int, int, int> position) {
+        int x = abs(c.end.first - position.first);
+        int y = abs(c.end.second - position.second);
+        int res = position.prio + x + y;
         return res;
     }
 
-    bool hasNext(const DictraVectContext& c) {
-        return c.prioQueu.size() != 0;
+    bool hasNext(const AContext& c) {
+        return c.minHeap.hasNext();
     }
 
-    DictraVectContext creteDictraVectContext(const Bord& bord) {
-        DictraVectContext res;
+    AContext creteAHeapContext(const Bord& bord) {
+        AContext res;
         for (int i = 0; i < bord.xSize; i++) {
             for (int j = 0; j < bord.ySize; j++) {
                 if (bord.data[i][j] == START) {
                     Triplet<int, int, int> start(i, j, 0);
-                    push(res, start);
-                    return res;
+                    push(res, 0, start);
+                }
+                if (bord.data[i][j] == END) {
+                    Pair<int, int> end(i, j);
+                    res.end = end;
                 }
             }
         }
         return res;
     }
 
-    bool nextStep(const Bord& bord, DictraVectContext& c) {
+    bool nextStep(const Bord& bord, AContext& c) {
         bool next = hasNext(c);
         if(!next) {
             return true;
@@ -60,8 +59,9 @@ namespace dictVect {
             if(left == EMPTY) {
                 bord.data[item.first - 1][item.second] = QUEUED;
             }
-            Triplet<int, int, int> toPush(item.first - 1, item.second, item.prio + 1);
-            push(c, toPush);
+            Triplet<int, int, int> nextItem(item.first - 1, item.second, item.prio);
+            nextItem.prio = aproxPriority(c, nextItem);
+            push(c, nextItem.prio, nextItem);
         }
 
         auto up = bord.data[item.first][item.second - 1];
@@ -69,8 +69,9 @@ namespace dictVect {
             if(up == EMPTY) {
                 bord.data[item.first][item.second - 1] = QUEUED;
             }
-            Triplet<int, int, int> toPush(item.first, item.second - 1, item.prio + 1);
-            push(c, toPush);
+            Triplet<int, int, int> nextItem(item.first, item.second - 1, item.prio);
+            nextItem.prio = aproxPriority(c, nextItem);
+            push(c, nextItem.prio, nextItem);
         }
 
         auto right = bord.data[item.first + 1][item.second];
@@ -78,8 +79,9 @@ namespace dictVect {
             if(right == EMPTY) {
                 bord.data[item.first + 1][item.second] = QUEUED;
             }
-            Triplet<int, int, int> toPush(item.first + 1, item.second, item.prio + 1);
-            push(c, toPush);
+            Triplet<int, int, int> nextItem(item.first + 1, item.second, item.prio);
+            nextItem.prio = aproxPriority(c, nextItem);
+            push(c, nextItem.prio, nextItem);
         }
 
         auto down = bord.data[item.first][item.second + 1];
@@ -87,8 +89,9 @@ namespace dictVect {
             if(down == EMPTY) {
                 bord.data[item.first][item.second + 1] = QUEUED;
             }
-            Triplet<int, int, int> toPush(item.first, item.second + 1, item.prio + 1);
-            push(c, toPush);
+            Triplet<int, int, int> nextItem(item.first, item.second + 1, item.prio);
+            nextItem.prio = aproxPriority(c, nextItem);
+            push(c, nextItem.prio, nextItem);
         }
 
         return false;

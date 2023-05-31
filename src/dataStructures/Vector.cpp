@@ -65,6 +65,12 @@ class Vector {
         void clear() {
             _size = 0;
         }
+
+        void swap(int idx1, int idx2) {
+            T tmp = _data[idx1];
+            _data[idx1] = _data[idx2];
+            _data[idx2] = tmp;
+        }
         
         T& operator[](int index) const {
             return _data[index];
